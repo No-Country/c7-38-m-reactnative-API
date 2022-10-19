@@ -10,9 +10,10 @@ const getAllProfiles = async (req, res, next) => {
 };
 
 const createProfile = async (req, res, next) => {
-  const { phone, objetive, weight, email, image } = req.body;
+  const { phone, objetive, weight, email, image, userName } = req.body;
 
   const newProfile = await Profile.create({
+    userName,
     phone,
     objetive,
     weight,
@@ -35,7 +36,7 @@ const getProfileById = async (req, res, next) => {
 };
 
 const updateProfile = async (req, res, next) => {
-  const { phone, objetive, weight, email, image } = req.body;
+  const { phone, objetive, weight, email, image, userName } = req.body;
   const id = req.params.id;
   const profile = await Profile.findByIdAndUpdate(id, {
     phone,
@@ -43,6 +44,7 @@ const updateProfile = async (req, res, next) => {
     weight,
     email,
     image,
+    userName,
   });
   res.send(profile);
 };
