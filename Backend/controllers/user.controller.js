@@ -4,10 +4,6 @@ const User = require("../Login/models/user");
 
 const getAllUsers = async (req, res, next) => {
   const users = await User.find();
-  /* include: [
-		{ model: Profile, include: { model: Training, include: Progress } },
-	 		
-  ], */
   res.status(200).json({
     status: "success",
     data: { users },
@@ -34,11 +30,8 @@ const createUser = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
   const { id } = req.params;
-  const user = await User.findOne({ where: { id } });
-  res.status(200).json({
-    status: "success",
-    data: { user },
-  });
+  const user = await User.findById(id);
+  res.send(user);
 };
 
 const updateUser = async (req, res, next) => {
