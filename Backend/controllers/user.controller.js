@@ -19,13 +19,7 @@ const createUser = async (req, res, next) => {
     password,
   });
 
-  /* if (userExists) {
-    return next(new ('Email already taken'));
-  } */
-  res.status(201).json({
-    status: "success",
-    data: { newUser },
-  });
+  res.send(newUser);
 };
 
 const getUserById = async (req, res, next) => {
@@ -36,24 +30,17 @@ const getUserById = async (req, res, next) => {
 
 const updateUser = async (req, res, next) => {
   const { name } = req.body;
-
   const { id } = req.params;
-
   const user = await User.findOne({ where: { id } });
-
   await user.update({ name });
-
-  res.status(204).json({ status: "success", data: { user } });
+  res.send(user);
 };
 
 const deleteUser = async (req, res, next) => {
   const { id } = req.params;
-
   const user = await User.findOne({ where: { id } });
-
-  await user.update({ status: "deleted" });
-
-  res.status(204).json({ status: "success" });
+  await User.findById(id);
+  res.send(user);
 };
 
 module.exports = {

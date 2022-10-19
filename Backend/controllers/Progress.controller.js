@@ -1,51 +1,41 @@
-const Progress = require("../Progress/models/progress")
+const Progress = require("../Progress/models/progress");
 
 const getAllProgress = async (req, res, next) => {
   const progress = await Progress.find();
-
-  res.status(200).json({
-    status: "success",
-    data: { progress },
-  });
+  res.send(progress);
 };
 
 const createProgress = async (req, res, next) => {
-  const { date, commentProgress, weight } = req.body;
-
+  const { date, description, weight, image } = req.body;
   const newProgress = await Progress.create({
-    date,
-    commentProgress,
-    weight,
+    progress: [{ date, description, weight, image }],
   });
-
-  res.status(201).json({
-    status: "success",
-    data: { newProgress },
-  });
+  res.send(newProgress);
 };
 
 const getProgressById = async (req, res, next) => {
   const id = req.params.id;
   const progress = await Progress.findById(id);
-  res.status(200).json({
-    status: "success",
-    data: { progress },
-  });
+  res.send(progress);
 };
 
 const updateProgress = async (req, res, next) => {
-  const { image, commentProgress} = req.body;
+  const { date, description, weight, image } = req.body;
   const id = req.params.id;
-  const progress = await Progress.findByIdAndUpdate(id, { image: image, commentProgress: commentProgress });
+  const oldProgress = await Progress.findById(id);
+  console.log(oldProgress);
+  const progress = await Progress.findByIdAndUpdate(id, {
+    progress: [...oldProgress.progress, { date, description, weight, image }],
+  });
 
-  res.status(204).json({ status: "success", data: { progress } });
+  res.send(progress);
 };
 
 const deleteProgress = async (req, res, next) => {
   const { status } = req.body;
   const id = req.params.id;
   const progress = await Progress.findByIdAndUpdate(id, { status });
-  res.status(204).json({ status: "success", data: { progress } });
+  res.send(progress);
 };
 
 module.exports = {
