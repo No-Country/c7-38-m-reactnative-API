@@ -1,5 +1,4 @@
-const Profile = require("../Profile/profile")
-
+const Profile = require("../Profile/profile");
 
 const getAllProfiles = async (req, res, next) => {
   const profiles = await Profile.find();
@@ -11,13 +10,14 @@ const getAllProfiles = async (req, res, next) => {
 };
 
 const createProfile = async (req, res, next) => {
-  const { age, phone, weight, idealWeight  } = req.body;
+  const { phone, objetive, weight, email, image } = req.body;
 
   const newProfile = await Profile.create({
-    age,
     phone,
+    objetive,
     weight,
-    idealWeight
+    email,
+    image,
   });
 
   res.status(201).json({
@@ -26,24 +26,25 @@ const createProfile = async (req, res, next) => {
   });
 };
 
-
-
 const getProfileById = async (req, res, next) => {
   const id = req.params.id;
   const profile = await Profile.findById(id);
-  res.status(200).json({
-    status: "success",
-    data: { profile },
+  res.send({
+    profile,
   });
 };
 
-
 const updateProfile = async (req, res, next) => {
-  const { phone, idealWeight } = req.body;
+  const { phone, objetive, weight, email, image } = req.body;
   const id = req.params.id;
-  const profile = await Profile.findByIdAndUpdate(id, { phone: phone, idealWeight: idealWeight });
-
-  res.status(204).json({ status: "success", data: { profile } });
+  const profile = await Profile.findByIdAndUpdate(id, {
+    phone,
+    objetive,
+    weight,
+    email,
+    image,
+  });
+  res.send(profile);
 };
 
 const deleteProfile = async (req, res, next) => {
