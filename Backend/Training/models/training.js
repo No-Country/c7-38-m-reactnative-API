@@ -2,16 +2,6 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const trainingSchema = new Schema({
-  progreesId: {
-    type: mongoose.Schema.ObjectId,
-    ref: "Progress",
-  },
-
-  userId: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-  },
-
   nameTraining: {
     type: String,
     requiere: true,
