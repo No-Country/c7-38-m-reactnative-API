@@ -21,10 +21,7 @@ const createProfile = async (req, res, next) => {
     image,
   });
 
-  res.status(201).json({
-    status: "success",
-    data: { newProfile },
-  });
+  res.send(newProfile);
 };
 
 const getProfileById = async (req, res, next) => {
