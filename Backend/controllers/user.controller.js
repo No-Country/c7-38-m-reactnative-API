@@ -3,7 +3,7 @@ const User = require("../Login/models/user");
 //const { Training} = require('../Training/models/training')
 
 const getAllUsers = async (req, res, next) => {
-  const users = await User.findAll({ where: { status: "active" } });
+  const users = await User.find();
   /* include: [
 		{ model: Profile, include: { model: Training, include: Progress } },
 	 		
