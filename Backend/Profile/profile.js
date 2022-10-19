@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const profileSchema = new Schema({
   userName: { type: String, require: true, allowNull: false },
-  image: { type: String, require: true, allowNull: false },
+  image: { type: String },
   email: { type: String, require: true, allowNull: false },
   age: {
     type: String,
