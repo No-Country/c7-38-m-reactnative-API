@@ -35,15 +35,18 @@ const getProfileById = async (req, res, next) => {
 const updateProfile = async (req, res, next) => {
   const { phone, objetive, weight, email, image, userName } = req.body;
   const id = req.params.id;
-  const profile = await Profile.findByIdAndUpdate(id, {
-    phone,
-    objetive,
-    weight,
-    email,
-    image,
-    userName,
-  });
-  res.send(profile);
+  if (id) {
+    const profile = await Profile.findByIdAndUpdate(id, {
+      phone,
+      objetive,
+      weight,
+      email,
+      image,
+      userName,
+    });
+    res.send(profile);
+  }
+  res.json({ message: "error failed id is empty" });
 };
 
 const deleteProfile = async (req, res, next) => {
