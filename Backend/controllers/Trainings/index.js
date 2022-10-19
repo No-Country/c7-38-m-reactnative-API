@@ -1,6 +1,4 @@
-//const { User } = require('../Login/models/user');
-const Training = require("../Training/models/training");
-//const { Progress } = require('../Progress/models/progress')
+const Training = require("../../models/Trainings/index");
 
 const getTrainigById = async (req, res, next) => {
   const id = req.params;

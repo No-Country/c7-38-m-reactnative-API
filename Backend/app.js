@@ -1,12 +1,11 @@
 const express = require("express");
+const app = express();
 
 //Routers
-const { trainingRoutes } = require("./routes/training.routes");
-const { usersRouter } = require("./routes/user.routes.js");
-const { profilesRouter } = require("./routes/profile.routes");
-const { progressRouter } = require("./routes/progress.routes.js");
-
-const app = express();
+const trainingRoutes = require("./routes/Trainings/index");
+const usersRouter = require("./routes/Users/index");
+const profilesRouter = require("./routes/Profiles/index");
+const progressRouter = require("./routes/Progress/index");
 
 app.use(express.json());
 
@@ -24,4 +23,4 @@ app.all("*", (req, res) => {
   });
 });
 
-module.exports = { app };
+module.exports = app;

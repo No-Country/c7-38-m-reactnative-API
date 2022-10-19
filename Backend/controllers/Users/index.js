@@ -1,10 +1,7 @@
-//const {Profile} = require('../Profile/profile')
-const User = require("../Login/models/user");
-//const { Training} = require('../Training/models/training')
+const User = require("../../models/Users/index");
 
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
-
   const newUser = await User.create({
     name,
     email,
@@ -17,8 +14,12 @@ const createUser = async (req, res, next) => {
 const searchUserByEmail = async (req, res) => {
   const { email, password } = req.body;
   const verify = await User.find({ email: email });
-  if (verify[0].email && verify[0].password == password) {
-    res.send(verify);
+  if (verify[0]) {
+    if (verify[0].email && verify[0].password == password) {
+      return res.send(verify);
+    } else {
+      return res.json({ message: "password incorrect" });
+    }
   } else {
     res.json({ message: "user dont exist" });
   }

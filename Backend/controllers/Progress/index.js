@@ -1,4 +1,4 @@
-const Progress = require("../Progress/models/progress");
+const Progress = require("../../models/Progress/index");
 
 const getAllProgress = async (req, res, next) => {
   const progress = await Progress.find();
