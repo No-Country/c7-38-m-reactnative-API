@@ -2,14 +2,6 @@
 const User = require("../Login/models/user");
 //const { Training} = require('../Training/models/training')
 
-const getAllUsers = async (req, res, next) => {
-  const users = await User.find();
-  res.status(200).json({
-    status: "success",
-    data: { users },
-  });
-};
-
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
 
@@ -22,10 +14,14 @@ const createUser = async (req, res, next) => {
   res.send(newUser);
 };
 
-const getUserById = async (req, res, next) => {
-  const { id } = req.params;
-  const user = await User.findById(id);
-  res.send(user);
+const searchUserByEmail = async (req, res) => {
+  const { email, password } = req.body;
+  const verify = await User.find({ email: email });
+  if (verify[0].email && verify[0].password == password) {
+    res.send(verify);
+  } else {
+    res.json({ message: "user dont exist" });
+  }
 };
 
 const updateUser = async (req, res, next) => {
@@ -44,9 +40,8 @@ const deleteUser = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllUsers,
   createUser,
-  getUserById,
+  searchUserByEmail,
   updateUser,
   deleteUser,
 };
