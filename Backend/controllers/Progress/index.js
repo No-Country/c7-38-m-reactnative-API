@@ -36,7 +36,6 @@ const deleteProgress = async (req, res, next) => {
 };
 
 module.exports = {
-  getAllProgress,
   createProgress,
   getProgressById,
   updateProgress,
