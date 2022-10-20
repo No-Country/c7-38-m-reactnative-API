@@ -26,16 +26,18 @@ const getProfileById = async (req, res, next) => {
 
 const updateProfile = async (req, res, next) => {
   const { phone, objetive, weight, email, image, userName, idUser } = req.body;
-  const id = req.params.id;
-  const profile = await Profile.findByIdAndUpdate(id, {
-    phone,
-    objetive,
-    weight,
-    email,
-    image,
-    userName,
-    idUser,
-  });
+  const profile = await Profile.findOneAndUpdate(
+    { idUser },
+    {
+      phone,
+      objetive,
+      weight,
+      email,
+      image,
+      userName,
+      idUser,
+    }
+  );
   res.send(profile);
 };
 
