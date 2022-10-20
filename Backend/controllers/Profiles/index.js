@@ -42,9 +42,9 @@ const updateProfile = async (req, res, next) => {
 };
 
 const deleteProfile = async (req, res, next) => {
-  const { status } = req.body;
-  const id = req.params.id;
-  const profile = await Profile.findByIdAndUpdate(id, { status });
+  const { idUser } = req.body;
+
+  const profile = await Profile.findOneAndDelete({ idUser });
   res.status(204).json({ status: "success", data: { profile } });
 };
 

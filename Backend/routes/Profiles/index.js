@@ -8,7 +8,7 @@ const {
 
 router.post("/", createProfile);
 router.get("/:id", getProfileById);
-router.patch("/:id", updateProfile);
-router.delete("/:id", deleteProfile);
+router.patch("/", updateProfile);
+router.delete("/", deleteProfile);
 
 module.exports = router;
