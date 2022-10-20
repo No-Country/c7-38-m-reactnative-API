@@ -11,7 +11,7 @@ const {
 router.get("/", getAllProgress);
 router.post("/", createProgress);
 router.get("/:id", getProgressById);
-router.patch("/:id", updateProgress);
+router.patch("/", updateProgress);
 router.delete("/:id", deleteProgress);
 
 module.exports = router;

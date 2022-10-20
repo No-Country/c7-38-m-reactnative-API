@@ -9,7 +9,7 @@ const {
 
 router.post("/", createTrainig);
 router.get("/:id", getTrainigById);
-router.patch("/:id", updateTraining);
+router.patch("/", updateTraining);
 router.delete("/:id", deleteTrainig);
 
 module.exports = router;

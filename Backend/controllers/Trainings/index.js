@@ -22,16 +22,17 @@ const createTrainig = async (req, res) => {
 
 const updateTraining = async (req, res) => {
   const { nameTraining, category, days, hours, date, idUser } = req.body;
-  const { id } = req.params;
-
-  const training = await Training.findByIdAndUpdate(id, {
-    nameTraining,
-    category,
-    days,
-    hours,
-    date,
-    idUser,
-  });
+  const training = await Training.findOneAndUpdate(
+    { idUser },
+    {
+      nameTraining,
+      category,
+      days,
+      hours,
+      date,
+      idUser,
+    }
+  );
 
   res.send({ data: training });
 };

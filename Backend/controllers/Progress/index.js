@@ -22,13 +22,14 @@ const getProgressById = async (req, res, next) => {
 
 const updateProgress = async (req, res, next) => {
   const { date, description, weight, image, idUser } = req.body;
-  const id = req.params.id;
   const oldProgress = await Progress.findById(id);
-  console.log(oldProgress);
-  const progress = await Progress.findByIdAndUpdate(id, {
-    progress: [...oldProgress.progress, { date, description, weight, image }],
-    idUser,
-  });
+  const progress = await Progress.findOneAndUpdate(
+    { idUser },
+    {
+      progress: [...oldProgress.progress, { date, description, weight, image }],
+      idUser,
+    }
+  );
 
   res.send(progress);
 };
