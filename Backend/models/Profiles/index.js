@@ -25,6 +25,11 @@ const profileSchema = new Schema({
     require: true,
     allowNull: false,
   },
+  idUser: {
+    type: String,
+    require: true,
+    allowNull: false,
+  },
 });
 
 module.exports = mongoose.model("Profile", profileSchema);

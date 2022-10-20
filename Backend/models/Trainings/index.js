@@ -40,9 +40,10 @@ const trainingSchema = new Schema({
     },
   },
 
-  status: {
+  idUser: {
     type: String,
-    default: "active",
+    require: true,
+    allowNull: false,
   },
 });
 
