@@ -9,13 +9,17 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
   const { name, email, password } = req.body;
-  const newUser = await User.create({
-    name,
-    email,
-    password,
-  });
-
-  res.send(newUser);
+  const verify = await User.find({ email: email });
+  if (!verify[0]) {
+    const newUser = await User.create({
+      name,
+      email,
+      password,
+    });
+    return res.send(newUser);
+  } else {
+    res.send("Error user email already exist");
+  }
 };
 
 const searchUserByEmail = async (req, res) => {
