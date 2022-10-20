@@ -1,12 +1,12 @@
 const User = require("../../models/Users/index");
 
-const getUserById = async (req, res, next) => {
+const getUserById = async (req, res) => {
   const id = req.params;
-  const user = await User.findOne({ idUser: id });
+  const user = await User.findById(id);
   res.send(user);
 };
 
-const createUser = async (req, res, next) => {
+const createUser = async (req, res) => {
   const { name, email, password } = req.body;
   const newUser = await User.create({
     name,
@@ -31,7 +31,7 @@ const searchUserByEmail = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res, next) => {
+const updateUser = async (req, res) => {
   const { name } = req.body;
   const { id } = req.params;
   const user = await User.findOne({ where: { id } });
@@ -39,7 +39,7 @@ const updateUser = async (req, res, next) => {
   res.send(user);
 };
 
-const deleteUser = async (req, res, next) => {
+const deleteUser = async (req, res) => {
   const { id } = req.params;
   const user = await User.findOne({ where: { id } });
   await User.findById(id);
