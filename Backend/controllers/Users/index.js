@@ -1,5 +1,11 @@
 const User = require("../../models/Users/index");
 
+const getUserById = async (req, res, next) => {
+  const id = req.params;
+  const user = await User.findOne({ idUser: id });
+  res.send(user);
+};
+
 const createUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   const newUser = await User.create({
@@ -41,6 +47,7 @@ const deleteUser = async (req, res, next) => {
 };
 
 module.exports = {
+  getUserById,
   createUser,
   searchUserByEmail,
   updateUser,

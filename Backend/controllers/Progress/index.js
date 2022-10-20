@@ -1,10 +1,5 @@
 const Progress = require("../../models/Progress/index");
 
-const getAllProgress = async (req, res, next) => {
-  const progress = await Progress.find();
-  res.send(progress);
-};
-
 const createProgress = async (req, res, next) => {
   const { date, description, weight, image, idUser } = req.body;
   const newProgress = await Progress.create({
@@ -16,7 +11,7 @@ const createProgress = async (req, res, next) => {
 
 const getProgressById = async (req, res, next) => {
   const id = req.params.id;
-  const progress = await Progress.findById(id);
+  const progress = await Progress.findOne({ idUser: id });
   res.send(progress);
 };
 
