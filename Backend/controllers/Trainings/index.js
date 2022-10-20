@@ -7,20 +7,21 @@ const getTrainigById = async (req, res, next) => {
 };
 
 const createTrainig = async (req, res) => {
-  const { nameTraining, category, days, hours, date } = req.body;
+  const { nameTraining, category, days, hours, date, idUser } = req.body;
   const newTraining = await Training.create({
     nameTraining,
     category,
     days,
     hours,
     date,
+    idUser,
   });
 
   res.send(newTraining);
 };
 
 const updateTraining = async (req, res) => {
-  const { nameTraining, category, days, hours, date } = req.body;
+  const { nameTraining, category, days, hours, date, idUser } = req.body;
   const { id } = req.params;
 
   const training = await Training.findByIdAndUpdate(id, {
@@ -29,6 +30,7 @@ const updateTraining = async (req, res) => {
     days,
     hours,
     date,
+    idUser,
   });
 
   res.send({ data: training });

@@ -1,7 +1,7 @@
 const Profile = require("../../models/Profiles/index");
 
 const createProfile = async (req, res, next) => {
-  const { phone, objetive, weight, email, image, userName } = req.body;
+  const { phone, objetive, weight, email, image, userName, idUser } = req.body;
 
   const newProfile = await Profile.create({
     userName,
@@ -10,6 +10,7 @@ const createProfile = async (req, res, next) => {
     weight,
     email,
     image,
+    idUser,
   });
 
   res.send(newProfile);
@@ -24,7 +25,7 @@ const getProfileById = async (req, res, next) => {
 };
 
 const updateProfile = async (req, res, next) => {
-  const { phone, objetive, weight, email, image, userName } = req.body;
+  const { phone, objetive, weight, email, image, userName, idUser } = req.body;
   const id = req.params.id;
   const profile = await Profile.findByIdAndUpdate(id, {
     phone,
@@ -33,6 +34,7 @@ const updateProfile = async (req, res, next) => {
     email,
     image,
     userName,
+    idUser,
   });
   res.send(profile);
 };

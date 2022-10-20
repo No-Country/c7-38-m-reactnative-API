@@ -6,9 +6,10 @@ const getAllProgress = async (req, res, next) => {
 };
 
 const createProgress = async (req, res, next) => {
-  const { date, description, weight, image } = req.body;
+  const { date, description, weight, image, idUser } = req.body;
   const newProgress = await Progress.create({
     progress: [{ date, description, weight, image }],
+    idUser,
   });
   res.send(newProgress);
 };
@@ -20,12 +21,13 @@ const getProgressById = async (req, res, next) => {
 };
 
 const updateProgress = async (req, res, next) => {
-  const { date, description, weight, image } = req.body;
+  const { date, description, weight, image, idUser } = req.body;
   const id = req.params.id;
   const oldProgress = await Progress.findById(id);
   console.log(oldProgress);
   const progress = await Progress.findByIdAndUpdate(id, {
     progress: [...oldProgress.progress, { date, description, weight, image }],
+    idUser,
   });
 
   res.send(progress);
