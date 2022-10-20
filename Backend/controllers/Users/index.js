@@ -1,7 +1,8 @@
 const User = require("../../models/Users/index");
 
 const getUserById = async (req, res) => {
-  const id = req.params;
+  const { id } = req.params;
+  console.log(id);
   const user = await User.findById(id);
   res.send(user);
 };

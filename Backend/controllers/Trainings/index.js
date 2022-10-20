@@ -1,7 +1,7 @@
 const Training = require("../../models/Trainings/index");
 
 const getTrainigById = async (req, res, next) => {
-  const id = req.params;
+  const { id } = req.params;
   const training = await Training.findOne({ idUser: id });
   res.send(training);
 };
